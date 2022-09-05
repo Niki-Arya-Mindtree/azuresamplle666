@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.ClassStGtMeth;
@@ -17,15 +17,16 @@ public class Control {
 	@Autowired
 	private JpaRepository jparepo;
 	
-	@GetMapping("/uss")
+	@GetMapping("/usseer")
 	public List<ClassStGtMeth> getAll(){
-		
 		return jparepo.findAll();
+//		return jparepo.findAll();
 	}
 	
-	@PostMapping("/uss")
-	public void saveAll(@PathVariable ClassStGtMeth stgt){
-		jparepo.save(stgt);
+	@PostMapping("/usseer")
+	public void saveAll(@RequestBody ClassStGtMeth stgt){
+		jparepo.saveAndFlush(stgt);
+		//jparepo.save(stgt);
 	}
 
 
